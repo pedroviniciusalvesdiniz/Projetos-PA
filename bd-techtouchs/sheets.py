@@ -23,6 +23,7 @@ planilha = planilha_completa.get_worksheet(0)
 def inserir_dados(dados_lead):
     try:
         planilha.append_row(dados_lead, value_input_option="USER_ENTERED")
+        print(dados_lead)
         print("Sucesso: Lead inserido na TabelaLeads")
     except Exception as e:
         print("Erro: Não foi possível inserir o lead na TabelaLeads", e)

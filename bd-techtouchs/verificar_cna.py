@@ -45,7 +45,6 @@ def verificar_cna(nome, uf):
 
                 # Verificando se o UF do lead corresponde ao UF do resultado obtido
                 if uf_advogado[-1].text == uf:
-                    print(uf, uf_advogado[-1].text)
                     print(f"É advogado(a) {nome_advogado[-1].text.title()} - {inscricao_advogado[-1].text}/{uf_advogado[-1].text}")
                     return True
                 else:

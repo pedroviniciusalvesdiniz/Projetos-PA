@@ -14,10 +14,13 @@ headers = {
 }
 
 def send_wpp(numero, nome):
+    
+    message = f"Olá {nome.split()[0]}! Sou Vinicius da Processo Ágil. Notei que você se cadastrou na nossa plataforma. Você está com alguma dúvida?"
+
     payload = {
         'number': numero,
         'textMessage': {
-            "text": f"Olá {nome.split()[0]}! Sou Vinicius da Processo Ágil. Notei que você se cadastrou na nossa plataforma. Você está com alguma dúvida?"
+            "text": message
         },
         'delay': 10000
     }

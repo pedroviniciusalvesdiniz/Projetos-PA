@@ -16,6 +16,7 @@ driver = webdriver.Chrome(service=service, options=chrome_options)
 
 def verificar_cna(nome, uf):
     try:
+        print(f"Verificando {nome} no CNA...")
         # Abrindo a página do CNA no navegador
         driver.get("https://cna.oab.org.br/")
 
@@ -46,13 +47,19 @@ def verificar_cna(nome, uf):
                 # Verificando se o UF do lead corresponde ao UF do resultado obtido
                 if uf_advogado[-1].text == uf:
                     print(f"É advogado(a) {nome_advogado[-1].text.title()} - {inscricao_advogado[-1].text}/{uf_advogado[-1].text}")
+                    
+                    driver.quit()
                     return True
                 else:
                     print("O nome consta, mas não corresponde ao UF.")
-                    
+           
+            driver.quit()
             return False
         except:
-            print("Não consta na CNA.")
+            print("Não consta na CNA.") 
+            driver.quit()
             return False
+
+
     except Exception as e:
         print(f"Erro ao verificar CNA: {e}")

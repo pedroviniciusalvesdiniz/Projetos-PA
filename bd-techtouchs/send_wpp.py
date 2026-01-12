@@ -14,7 +14,7 @@ headers = {
 }
 
 def send_wpp(numero, nome):
-    
+
     message = f"Olá {nome.split()[0]}! Sou Vinicius da Processo Ágil. Notei que você se cadastrou na nossa plataforma. Você está com alguma dúvida?"
 
     payload = {
@@ -27,6 +27,7 @@ def send_wpp(numero, nome):
 
     try:
         response = requests.post(url, headers=headers, json=payload)
+        print("Mensagem enviada com sucesso.", response.json())
         return response.json()
     except Exception as e:
         print(f"Erro ao enviar mensagem: {e}")

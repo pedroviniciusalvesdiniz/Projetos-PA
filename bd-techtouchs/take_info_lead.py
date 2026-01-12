@@ -10,6 +10,8 @@ from captura_uf import capturar_uf
 from verificar_cna import verificar_cna
 from datetime import date
 
+print("entrou take")
+
 load_dotenv()
 
 chrome_options = Options()
@@ -64,21 +66,19 @@ def take_info_lead(url):
 
         nome = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaLinkNomeUsuario").text
         cpf = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaSpnDocumento").text
-        print(cpf)
-        print(cpf.replace(".", "").replace("-", ""))
-        telefone = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaSpnTelefone").text.replace("+", "").replace(" ", "").replace("-", "")
+        telefone = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaSpnTelefone").text.replace("+", "").replace(" ", "").replace("-", "").replace("(", "").replace(")", "")
         email = driver.find_element(By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaSpnEmail").text
         ddd = telefone[2:4]
         uf = capturar_uf(ddd)
         isLawer = verificar_cna(nome, uf)
         data = date.today().strftime('%d/%m/%Y')
 
-        hiperlink_wpp = f'=HYPERLINK("https://api.whatsapp.com/send?phone={telefone}"; "{telefone}")'
+        hiperlink = f"=HYPERLINK('https://api.whatsapp.com/send?phone={telefone}', {telefone})"
 
         dados_lead = [
             nome,
-            cpf.replace(".", "").replace("-", ""),
-            hiperlink_wpp,
+            f"'{cpf.replace(".", "").replace("-", "")}",
+            hiperlink,
             email,
             uf,
             isLawer,

@@ -6,6 +6,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+print("Entrou verificar")
+
 # Configurações de Opções do Chrome
 chrome_options = Options()
 chrome_options.add_argument("--headless=new") # Não abrir a janela do navegador

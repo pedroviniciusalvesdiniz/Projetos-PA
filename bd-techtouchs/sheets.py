@@ -4,8 +4,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 from dotenv import load_dotenv
 import os
 
-print("entrou sheets")
-
 load_dotenv()
 
 filename = os.getenv("FILENAME_CREDENTIALS")
@@ -23,9 +21,9 @@ planilha_completa = client.open(
 planilha = planilha_completa.get_worksheet(0)
 
 def inserir_dados(dados_lead):
-    print(dados_lead)
     try:
         planilha.append_row(dados_lead, value_input_option="USER_ENTERED")
         print("Sucesso: Lead inserido na TabelaLeads")
+        print(dados_lead)
     except Exception as e:
         print("Erro: Não foi possível inserir o lead na TabelaLeads", e)

@@ -11,6 +11,7 @@ import time
 from captura_uf import capturar_uf
 from verificar_cna import verificar_cna  # agora recebe driver como parâmetro
 from datetime import date
+import webbrowser
 
 load_dotenv()
 
@@ -80,9 +81,9 @@ def take_info_lead(url):
             email,
             uf,
             isLawer,
-            data
+            data,
+            telefone
         ]
-
         return dados_lead
 
     except Exception as e:

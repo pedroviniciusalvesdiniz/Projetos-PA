@@ -17,7 +17,7 @@ def pegar_dados_manual():
 
     dados_lead = [
         nome,
-        f"'{cpf.replace('.', '').replace('-', '')}",
+        f"'{cpf.replace('.', '').replace('-', '').replace('/', '')}",
         hiperlink,
         email,
         uf,

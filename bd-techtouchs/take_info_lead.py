@@ -15,16 +15,21 @@ from datetime import date
 load_dotenv()
 
 def criar_driver():
-    chrome_options = Options()
-    chrome_options.add_argument("--headless=new")      # ATIVADO: muito mais rápido
-    chrome_options.add_argument("--incognito") # Abre em modo incognito
-    # Removidas: incognito, maximized, detach (não precisa mais)
+    try:
+        print("Criando o driver")
+        chrome_options = Options()
+        # chrome_options.add_argument("--headless=new")      # ATIVADO: muito mais rápido
+        # chrome_options.add_argument("--incognito") # Abre em modo incognito
+        chrome_options.add_experimental_option("detach", True)
 
-    service = Service(ChromeDriverManager().install())
+        service = Service(ChromeDriverManager().install())
 
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+        driver = webdriver.Chrome(service=service, options=chrome_options)
 
-    return driver
+        return driver
+    except Exception as e:
+        print("Erro ao criar o driver", e)
+        
 
 def entry_account(driver):
     try:
@@ -33,19 +38,21 @@ def entry_account(driver):
 
         wait = WebDriverWait(driver, 20)
 
-        campo_usuario = wait.until(EC.presence_of_element_located((By.ID, "campoUsuarioLogin")))
-        campo_usuario.send_keys(os.getenv("PA_USER"))
+        campo_usuario = wait.until(EC.element_to_be_clickable((By.ID, "campoUsuarioLogin")))
+        # campo_usuario.send_keys(os.getenv("PA_USER"))
+        campo_usuario.send_keys("Vinicius")
 
         time.sleep(1)
     
-        campo_senha = wait.until(EC.presence_of_element_located((By.ID, "campoUsuarioSenha")))
-        campo_senha.send_keys(os.getenv("PA_PASSWORD"))
+        campo_senha = wait.until(EC.element_to_be_clickable((By.ID, "campoUsuarioSenha")))
+        # campo_senha.send_keys(os.getenv("PA_PASSWORD"))
+        campo_senha.send_keys("Trabalhe26!")
         
         time.sleep(1)
 
         wait.until(EC.element_to_be_clickable((By.ID, "kt_login_signin_submit"))).click()
 
-        time.sleep(2)
+        time.sleep(1)
 
         print("Entrou no Softurbano")
 

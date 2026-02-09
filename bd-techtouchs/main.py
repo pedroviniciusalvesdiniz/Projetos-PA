@@ -13,8 +13,8 @@ def main():
             url = input( "Digite a url do perfil: ")
             dados_lead = take_info_lead(url)
 
-        telefone = dados_lead[-1]
-        primeiro_nome = dados_lead[0].split()[0]
+        telefone = dados_lead["telefone"]
+        primeiro_nome = dados_lead["nome"].split()[0]
         print(dados_lead)
 
         if dados_lead != None:

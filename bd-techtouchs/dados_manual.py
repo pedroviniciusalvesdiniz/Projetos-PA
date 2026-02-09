@@ -15,15 +15,15 @@ def pegar_dados_manual():
     data = date.today().strftime('%d/%m/%Y')
     hiperlink = f'=HYPERLINK("https://api.whatsapp.com/send?phone={telefone}"; {telefone})'
 
-    dados_lead = [
-        nome,
-        f"'{cpf.replace('.', '').replace('-', '').replace('/', '')}",
-        hiperlink,
-        email,
-        uf,
-        isLawer,
-        data,
-        telefone
-    ]
+    dados_lead = {
+        "nome": nome,
+        "cpf": f"'{cpf.replace('.', '').replace('-', '').replace('/', '')}",
+        "hiperlink": hiperlink,
+        "email": email,
+        "uf": uf,
+        "isLawer": isLawer,
+        "data": data,
+        "telefone": telefone
+    }
     return dados_lead
     

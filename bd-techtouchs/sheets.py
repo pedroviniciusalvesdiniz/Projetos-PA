@@ -22,8 +22,20 @@ planilha = planilha_completa.get_worksheet(0)
 
 def inserir_dados(dados_lead):
     try:
-        planilha.append_row(dados_lead, value_input_option="USER_ENTERED")
+        # Cria a lista na ordem correta para a planilha
+        lista_dados = [
+            dados_lead["nome"],
+            dados_lead["cpf"],
+            dados_lead["hiperlink"],
+            dados_lead["email"],
+            dados_lead["uf"],
+            dados_lead["isLawer"],
+            dados_lead["data"]
+            # Telefone não entra na planilha
+        ]
+
+        planilha.append_row(lista_dados, value_input_option="USER_ENTERED")
         print("Sucesso: Lead inserido na TabelaLeads")
-        print(dados_lead)
+        # print(dados_lead)
     except Exception as e:
         print("Erro: Não foi possível inserir o lead na TabelaLeads", e)

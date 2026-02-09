@@ -11,6 +11,7 @@ import time
 from captura_uf import capturar_uf
 from verificar_cna import verificar_cna  # agora recebe driver como parâmetro
 from datetime import date
+import webbrowser
 
 load_dotenv()
 
@@ -80,16 +81,17 @@ def take_info_lead(url):
         data = date.today().strftime('%d/%m/%Y')
         hiperlink = f'=HYPERLINK("https://api.whatsapp.com/send?phone={telefone}"; {telefone})'
 
-        dados_lead = [
-            nome,
-            f"'{cpf.replace('.', '').replace('-', '')}",
-            hiperlink,
-            email,
-            uf,
-            isLawer,
-            data
-        ]
-
+        dados_lead = { 
+            "nome": nome,
+            "cpf": f"'{cpf.replace('.', '').replace('-', '')}",
+            "hiperlink": hiperlink,
+            "email": email,
+            "uf": uf,
+            "isLawer": isLawer,
+            "data": data,
+            "telefone": telefone
+        }
+        
         return dados_lead
 
     except Exception as e:

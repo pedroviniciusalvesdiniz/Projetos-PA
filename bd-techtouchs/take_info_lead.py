@@ -12,6 +12,7 @@ from captura_uf import capturar_uf
 from verificar_cna import verificar_cna  # agora recebe driver como parâmetro
 from datetime import date
 import webbrowser
+from create_event import creating_event
 
 load_dotenv()
 
@@ -20,7 +21,8 @@ def criar_driver():
         print("Criando o driver")
         chrome_options = Options()
         # chrome_options.add_argument("--headless=new")      # ATIVADO: muito mais rápido
-        # chrome_options.add_argument("--incognito") # Abre em modo incognito
+        chrome_options.add_argument("--incognito") # Abre em modo incognito
+        chrome_options.add_argument("--start-maximized")
         chrome_options.add_experimental_option("detach", True)
 
         service = Service(ChromeDriverManager().install())
@@ -32,12 +34,12 @@ def criar_driver():
         print("Erro ao criar o driver", e)
         
 
-def entry_account(driver):
+def entry_account(driver, wait):
     try:
         print("Acessando conta do Softurbano")
         driver.get("https://processoagil.com/softurbano")
 
-        wait = WebDriverWait(driver, 20)
+        # wait = WebDriverWait(driver, 20)
 
         campo_usuario = wait.until(EC.element_to_be_clickable((By.ID, "campoUsuarioLogin")))
         # campo_usuario.send_keys(os.getenv("PA_USER"))
@@ -62,14 +64,14 @@ def entry_account(driver):
 
 def take_info_lead(url):
     driver = criar_driver()  # único driver
+    wait = WebDriverWait(driver, 20)
     
     try:
-        entry_account(driver)
+        entry_account(driver, wait)
         
         print("Acessando perfil do lead")
         driver.get(url)
         
-        wait = WebDriverWait(driver, 10)
         
         nome = wait.until(EC.visibility_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaLinkNomeUsuario"))).text
         cpf = wait.until(EC.visibility_of_element_located((By.ID, "ctl00_ContentPlaceHolder1_DadosUsuario_CadastroAbaSpnDocumento"))).text
@@ -92,6 +94,9 @@ def take_info_lead(url):
             "telefone": telefone
         }
         
+        time.sleep(1)
+        creating_event(driver, url, dados_lead)
+
         return dados_lead
 
     except Exception as e:

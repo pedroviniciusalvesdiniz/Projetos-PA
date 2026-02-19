@@ -95,7 +95,7 @@ def take_info_lead(url):
         }
         
         time.sleep(1)
-        creating_event(driver, url, dados_lead)
+        creating_event(driver, dados_lead)
 
         return dados_lead
 

@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 import time
 
-def creating_event(driver, url, dados):
+def creating_event(driver, dados):
     # driver = criar_driver()
 
     # entry_account(driver)
@@ -15,13 +15,16 @@ def creating_event(driver, url, dados):
     try:
 
         wait = WebDriverWait(driver, 20)
-        driver.get(url)
+        driver.get("https://bernerspa.processoagil.com/Sistema/Planejamento/Agenda.aspx")
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MenuUsuarioConteudoMenu"]/ul/li[5]/a'))).click()
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="AgendaConteudoAgenda"]/div/div/div/div[1]/div[2]/a'))).click()
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="aspnetForm"]/div[3]/div[11]/div[2]/div/div/div[1]/div/div[1]/ul/li/div/a'))).click()
+        # wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="aspnetForm"]/div[3]/div[11]/div[2]/div/div/div[1]/div/div[1]/ul/li/div/a'))).click()
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_InpResumoTituloEvento"]'))).send_keys(f"Abordagem 1 - ${dados["nome"]} - ${dados["telefone"]}")
+        print(dados["nome"])
+        print(dados["telefone"])
+
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_InpResumoTituloEvento"]'))).send_keys(f"Abordagem 1 - {dados["nome"]} - {dados["telefone"]}")
 
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="SeletorArvoreTagVaziaMasterPageDivInserirEvento_divResumoEixoEstrategico"]/span'))).click()
 

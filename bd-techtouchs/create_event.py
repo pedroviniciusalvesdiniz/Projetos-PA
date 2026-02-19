@@ -21,8 +21,8 @@ def creating_event(driver, dados):
 
         # wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="aspnetForm"]/div[3]/div[11]/div[2]/div/div/div[1]/div/div[1]/ul/li/div/a'))).click()
 
-        print(dados["nome"])
-        print(dados["telefone"])
+        # print(dados["nome"])
+        # print(dados["telefone"])
 
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_InpResumoTituloEvento"]'))).send_keys(f"Abordagem 1 - {dados["nome"]} - {dados["telefone"]}")
 
@@ -38,6 +38,8 @@ def creating_event(driver, dados):
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_ResumoSlcFaseEvento"]/option[9]'))).click()
 
         time.sleep(1)
+
+        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_novaTarefaLiteAreaDescricao"]/p'))).send_keys(f"{dados['cpf']} - {dados['email']} - {dados['uf']} - {dados['isLawer']}")
 
         wait.until(EC.element_to_be_clickable((By.ID, 'MasterPageDivInserirEvento_InpInserirEvento'))).click()
 

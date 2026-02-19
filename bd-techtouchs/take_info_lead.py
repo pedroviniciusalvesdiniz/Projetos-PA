@@ -20,7 +20,7 @@ def criar_driver():
     try:
         print("Criando o driver")
         chrome_options = Options()
-        # chrome_options.add_argument("--headless=new")      # ATIVADO: muito mais rápido
+        chrome_options.add_argument("--headless=new")      # ATIVADO: muito mais rápido
         chrome_options.add_argument("--incognito") # Abre em modo incognito
         chrome_options.add_argument("--start-maximized")
         chrome_options.add_experimental_option("detach", True)

@@ -1,3 +1,4 @@
 .env*
 crm-python-482903-70bfff612435.json
 __pycache__
+venv

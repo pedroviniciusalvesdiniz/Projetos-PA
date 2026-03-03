@@ -14,17 +14,18 @@ def creating_event(driver, dados):
     # driver.get("https://processoagil.com/softurbano")
     try:
 
-        wait = WebDriverWait(driver, 20)
+        
         driver.get("https://bernerspa.processoagil.com/Sistema/Planejamento/Agenda.aspx")
+        wait = WebDriverWait(driver, 20)
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="AgendaConteudoAgenda"]/div/div/div/div[1]/div[2]/a'))).click()
+        wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="AgendaConteudoAgenda"]/div/div/div/div[1]/div[2]/a'))).click()
 
         # wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="aspnetForm"]/div[3]/div[11]/div[2]/div/div/div[1]/div/div[1]/ul/li/div/a'))).click()
 
         # print(dados["nome"])
         # print(dados["telefone"])
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_InpResumoTituloEvento"]'))).send_keys(f"Abordagem 1 - {dados["nome"]} - {dados["telefone"]}")
+        wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="MasterPageDivInserirEvento_InpResumoTituloEvento"]'))).send_keys(f"Abordagem 1 - {dados["nome"]} - {dados["telefone"]}")
 
         wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="SeletorArvoreTagVaziaMasterPageDivInserirEvento_divResumoEixoEstrategico"]/span'))).click()
 
@@ -39,7 +40,7 @@ def creating_event(driver, dados):
 
         time.sleep(1)
 
-        wait.until(EC.element_to_be_clickable((By.XPATH, '//*[@id="MasterPageDivInserirEvento_novaTarefaLiteAreaDescricao"]/p'))).send_keys(f"{dados['cpf']} - {dados['email']} - {dados['uf']} - {dados['isLawer']}")
+        wait.until(EC.visibility_of_element_located((By.XPATH, '//*[@id="MasterPageDivInserirEvento_novaTarefaLiteAreaDescricao"]/p'))).send_keys(f"{dados['cpf']} - {dados['email']} - {dados['uf']} - {dados['isLawer']}")
 
         wait.until(EC.element_to_be_clickable((By.ID, 'MasterPageDivInserirEvento_InpInserirEvento'))).click()
 

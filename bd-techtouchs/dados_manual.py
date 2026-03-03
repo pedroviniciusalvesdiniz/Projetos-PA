@@ -2,9 +2,17 @@ from captura_uf import capturar_uf
 from verificar_cna import verificar_cna
 from datetime import date
 from take_info_lead import criar_driver
+from take_info_lead import entry_account
+from create_event import creating_event
+from selenium.webdriver.support.ui import WebDriverWait
+import time
 
 def pegar_dados_manual():
     driver = criar_driver()
+    # wait = WebDriverWait(driver, 20)
+    # entry_account(driver, wait) 
+    
+    
     nome = input("Digite o nome: ")
     cpf = input("Digite o cpf: ")
     telefone = input("Digite o telefone: ")
@@ -25,5 +33,11 @@ def pegar_dados_manual():
         "data": data,
         "telefone": telefone
     }
+
+    # time.sleep(1)
+    # creating_event(driver, dados_lead)
+
+    driver.quit()
+
     return dados_lead
     
